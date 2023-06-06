@@ -7,10 +7,8 @@ class Pacientes {
         this.doctor = doctor;
     }
 }
-
 // /*inicializo un arreglo vacio para generar el arreglo de pacientes*/
 const listaPacientes = [ ]; 
-
 
 // Traer el formulario desde html
 const idFormulario = document.getElementById('formulario');
@@ -19,7 +17,6 @@ const idFormulario = document.getElementById('formulario');
 idFormulario.addEventListener('submit', (e) => {
   e.preventDefault();
     
-
 // traigo cada elemento del formulario para hacer el arreglo, usando mi clase constructora  
   const nombre = document.getElementById('nombre').value;
   const apellido = document.getElementById('apellido').value;
@@ -32,17 +29,12 @@ idFormulario.addEventListener('submit', (e) => {
   localStorage.setItem('Paciente', JSON.stringify(listaPacientes));
 
   //Limpiamos el formulario
-  idFormulario.reset();
+    idFormulario.reset();
   
   //mostrar por pantalla datos del paciente
-
-const botonRegistro = document.getElementById("registro");
-const datos = document.getElementById("datos");
-const paciente = JSON.parse(localStorage.getItem("Paciente"));
-
-botonRegistro.addEventListener("click" , () => {
+    const datos = document.getElementById("datos");
+    const paciente = JSON.parse(localStorage.getItem("Paciente"));
     let persona = " ";
-    console.log(paciente);    
     paciente.forEach(paciente => {
         persona += `
             <p>Nombre: ${paciente.nombre}</p>
@@ -50,20 +42,20 @@ botonRegistro.addEventListener("click" , () => {
             <p>Teléfono: ${paciente.telefono}</p>
             <hr />`;
         });
-        datos.innerHTML = persona;
-    });
+    datos.innerHTML = persona;
+});
 
 // Mostrar cita del paciente
 const botonCita = document.getElementById("cita");
-const paciente1 = JSON.parse(localStorage.getItem("Paciente"));
-console.log(paciente1);
-
 botonCita.addEventListener("click" , () => { 
-    
-    paciente.forEach(paciente1 => {
-        atencion(nombre, apellido, doctor);
-    })
-});
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const telefono = document.getElementById('telefono').value;
+    const doctor = document.getElementById('doctor').value;
+    const paciente = new Pacientes(nombre, apellido, telefono, doctor);
+    localStorage.setItem('cita', JSON.stringify(paciente));  
+    idFormulario.reset();
+    atencion(nombre, apellido, doctor);
 });
 
 // funcion de atencion al cliente, se asocia al doctor
@@ -72,23 +64,25 @@ function atencion(nombrePaciente, apellidoPaciente, id){
     const resumen = document.getElementById("resumen");
     switch(especialista){
         case 1:
-            resumen.innerHTML = `<p>Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el cirujano</p>`;
+            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el cirujano`;
             break;
         case 2:
-            resumen.innerHTML = `<p>Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el odontólogo</p>`;
+            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el odontólogo`;
             break;
         case  3:
-            resumen.innerHTML = `<p>Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el pediatra</p>`;
+            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el pediatra`;
             break;
         default:
-            resumen.innerHTML = `<p>Lo sentimos mucho ${nombrePaciente} ${apellidoPaciente} no hay médico de esa especialidad</p>`;
+            resumen.innerHTML = `Lo sentimos mucho ${nombrePaciente} ${apellidoPaciente} no hay médico de esa especialidad`;
             break;    
         }
 }
 
-// borrar locastorage
+// borrar locastorage y pantalla
 let eliminar = document.getElementById("eliminar");
 eliminar.addEventListener("click", () => {
     localStorage.clear();
+    resumen.innerHTML = " ";
+    datos.innerHTML = " ";
 })
 
