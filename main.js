@@ -1,3 +1,4 @@
+
 // /*Clase constructora de paciente*/
 class Pacientes {
     constructor(nombre, apellido, telefono, doctor){
@@ -9,6 +10,7 @@ class Pacientes {
 }
 // /*inicializo un arreglo vacio para generar el arreglo de pacientes*/
 const listaPacientes = [ ]; 
+// console.log(listaPacientes);
 
 // Traer el formulario desde html
 const idFormulario = document.getElementById('formulario');
@@ -31,7 +33,7 @@ idFormulario.addEventListener('submit', (e) => {
   //Limpiamos el formulario
     idFormulario.reset();
   
-  //mostrar por pantalla datos del paciente
+  //mostrar por pantalla datos del paciente que se registra:
     const datos = document.getElementById("datos");
     const paciente = JSON.parse(localStorage.getItem("Paciente"));
     let persona = " ";
@@ -64,19 +66,71 @@ function atencion(nombrePaciente, apellidoPaciente, id){
     const resumen = document.getElementById("resumen");
     switch(especialista){
         case 1:
-            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el cirujano`;
+            Swal.fire(`Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el cirujano`);
             break;
-        case 2:
-            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el odontólogo`;
+        case 2: 
+            Swal.fire(`Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el odontólogo`);
             break;
         case  3:
-            resumen.innerHTML = `Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el pediatra`;
+            Swal.fire(`Bienvenido ${nombrePaciente} ${apellidoPaciente} enseguida lo atenderá el pediatra`);
             break;
         default:
-            resumen.innerHTML = `Lo sentimos mucho ${nombrePaciente} ${apellidoPaciente} no hay médico de esa especialidad`;
+            Swal.fire(`Lo sentimos mucho ${nombrePaciente} ${apellidoPaciente} no hay médico de esa especialidad`);
             break;    
         }
 }
+
+// lista de pacientes asociado a cada doctor:
+let lista = document.getElementById("listado");
+let d1 = document.getElementById('pacientes1');
+let d2 = document.getElementById('pacientes2');
+let d3 = document.getElementById('pacientes3');
+let cirujano = document.getElementById('cirujano');
+let odontologo = document.getElementById('odontologo');
+let pediatra = document.getElementById('pediatra');
+
+// uso del base de datos del
+let pacienteNuevo = 
+fetch("./pacientes.json")
+    .then((respuesta) => respuesta.json())
+    .then((datos) => {
+        datos.forEach((pacientes) => {
+            if(pacientes.id === 1){
+                cirujano.addEventListener('mousedown', () => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                    <li class="list-group-item">Nombre: ${pacientes.nombre}</li>
+                    <li class="list-group-item">Apellido: ${pacientes.apellido}</li>
+                    <li class="list-group-item">Teléfono: ${pacientes.telefono}</li>
+                    `;
+                d1.append(li);
+                
+                });
+            }else if(pacientes.id === 2) {
+                odontologo.addEventListener('mousedown', () => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                    <li class="list-group-item">Nombre: ${pacientes.nombre}</li>
+                    <li class="list-group-item">Apellido: ${pacientes.apellido}</li>
+                    <li class="list-group-item">Teléfono: ${pacientes.telefono}</li>
+                    `;
+               d2.append(li); 
+                })
+            }else if (pacientes.id === 3) {
+                pediatra.addEventListener('mousedown', () => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                    <li class="list-group-item">Nombre: ${pacientes.nombre}</li>
+                    <li class="list-group-item">Apellido: ${pacientes.apellido}</li>
+                    <li class="list-group-item">Teléfono: ${pacientes.telefono}</li>
+                    `;
+                    d3.append(li);
+                })
+            };
+        });
+    });
+
+
 
 // borrar locastorage y pantalla
 let eliminar = document.getElementById("eliminar");
@@ -85,4 +139,30 @@ eliminar.addEventListener("click", () => {
     resumen.innerHTML = " ";
     datos.innerHTML = " ";
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

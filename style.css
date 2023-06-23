@@ -2,12 +2,20 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: blueviolet;
     text-align: center;
+    margin-top: 10px;
 }
 .titulo2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: violet ;
     text-align: center;
 }
+.titulo3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: violet ;
+    text-align: left;
+    margin-left: 60px;
+}
+
 .menu{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: thistle;
@@ -15,6 +23,7 @@
 }
 .dr{
     font-size: medium;
+    margin-top: 10px;
 }
 .boton{
     border-color: blueviolet;
@@ -24,4 +33,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.contenedor{
+    display: flex;
+    text-align: left;
+}
+.opciones{
+    width: 50px;
+    margin-left: 30px;
+    display: flex;
 }

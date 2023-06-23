@@ -1,0 +1,11 @@
+[
+    {"id": 1, "nombre": "Luis", "apellido": "Abreu", "telefono": 27830916},
+    {"id": 2, "nombre": "María", "apellido": "Terán", "telefono": 27048763},
+    {"id": 3, "nombre": "Pepe", "apellido": "Jiménez", "telefono": 27944600},
+    {"id": 1, "nombre": "Fernando", "apellido": "Ramírez", "telefono": 33371578},
+    {"id": 2, "nombre": "Marta", "apellido": "Fernández", "telefono": 12189268},
+    {"id": 3, "nombre": "Lucia", "apellido": "Mora", "telefono": 89025679},
+    {"id": 1, "nombre": "Camila", "apellido": "López", "telefono": 88899378},
+    {"id": 2, "nombre": "Eduardo", "apellido": "Hernández", "telefono": 22278309},
+    {"id": 3, "nombre": "Jose", "apellido": "Quiñones", "telefono": 66332908}
+]
